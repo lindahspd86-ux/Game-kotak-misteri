@@ -1,0 +1,19 @@
+KOTAK MISTERI IPA — ZAT DAN PERUBAHANNYA
+Kelas VII SMP | IPA Terpadu
+
+CARA MENJALANKAN
+1. Ekstrak seluruh isi ZIP ke folder di komputer.
+2. Buka file kotak_misteri_ipa_zat_dan_perubahannya.html menggunakan Chrome, Edge, atau Firefox.
+3. Pilih kotak misteri untuk memulai. Suara dapat diaktifkan/dimatikan dari tombol di bawah papan.
+4. Tekan "Main Lagi" untuk mengulang permainan.
+
+FITUR
+- 10 kotak misteri yang dibuka satu per satu
+- Soal pilihan ganda beserta penjelasan
+- Hadiah bonus poin
+- Skor dan pencapaian otomatis
+- Animasi pembukaan dan efek suara ringan
+- Tombol besar, tampilan responsif untuk Papan Interaktif Digital
+- Dapat dimainkan tanpa koneksi internet setelah file diekstrak
+
+Catatan: Ini adalah permainan HTML interaktif, bukan file PowerPoint.

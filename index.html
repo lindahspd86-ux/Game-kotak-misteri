@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kotak Misteri IPA — Zat dan Perubahannya</title>
+<style>
+:root{--ink:#f7f7ff;--muted:#c7c9e8;--bg:#11122c;--panel:#1d2050;--pink:#ff6db3;--cyan:#5de6e6;--gold:#ffd166;--green:#7df0ad}
+*{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:radial-gradient(ellipse at top,#343678 0%,#191a42 45%,#0d0e22 100%);padding:22px}
+.wrap{max-width:1100px;margin:auto}.top{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.brand{display:flex;gap:12px;align-items:center}.logo{font-size:2.4rem;background:#ffffff18;border:1px solid #ffffff24;border-radius:18px;padding:9px 13px}
+h1{font-size:clamp(1.8rem,4vw,3.1rem);margin:0;line-height:1.05;letter-spacing:-1px}.subtitle{color:var(--muted);margin:8px 0 0;font-size:1rem}
+.pill{border:1px solid #ffffff30;background:#ffffff12;padding:12px 18px;border-radius:16px;font-weight:800;font-size:1.05rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.stat{background:#ffffff10;border:1px solid #ffffff20;border-radius:17px;padding:14px 18px}.stat small{color:var(--muted);display:block;font-size:.85rem}.stat strong{font-size:1.55rem}
+.notice{padding:14px 18px;background:#5de6e61a;border:1px solid #5de6e655;border-radius:15px;margin-bottom:18px;color:#e9ffff}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}.box{min-height:150px;border:2px solid #ffffff24;border-radius:20px;background:linear-gradient(145deg,#3d418b,#25285d);color:white;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 0 #111332,0 14px 22px #0003;transition:transform .18s,filter .18s,border-color .18s;padding:12px}
+.box:hover:not(:disabled),.box:focus-visible{transform:translateY(-5px) scale(1.02);border-color:var(--cyan);outline:none}.box:active:not(:disabled){transform:translateY(2px);box-shadow:0 3px 0 #111332}
+.box .num{font-size:1rem;font-weight:900;color:#d7dbff}.box .chest{font-size:3.2rem;filter:drop-shadow(0 4px 0 #111332)}.box .label{font-weight:800;font-size:1rem}.box.opened{background:linear-gradient(145deg,#31344e,#22243c);filter:saturate(.65);border-color:#77799b;cursor:default}.box.opened .chest{filter:grayscale(.5);font-size:2.7rem}.box.opened:after{content:"TERBUKA";font-size:.72rem;letter-spacing:1px;font-weight:900;color:var(--green);border:1px solid #7df0ad66;padding:4px 8px;border-radius:9px}
+.box.bonus{border-color:var(--gold)}.box.bonus:before{content:"✦ BONUS";position:absolute;top:8px;right:8px;color:var(--gold);font-size:.65rem;font-weight:900}
+.controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:24px 0 8px}.btn{min-height:56px;padding:14px 24px;border:0;border-radius:15px;font-size:1.05rem;font-weight:900;cursor:pointer;touch-action:manipulation}.btn.primary{background:linear-gradient(100deg,var(--pink),#ff9c77);color:#27112b;box-shadow:0 5px 0 #a73c72}.btn.secondary{background:#ffffff14;border:1px solid #ffffff35;color:white}.btn:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}.btn:active{transform:translateY(2px)}
+.footer{text-align:center;color:#bfc1e6;font-size:.9rem;margin:22px 0}
+.modal{position:fixed;inset:0;background:#090a20d9;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal.show{display:flex;animation:fade .2s ease}.dialog{width:min(650px,100%);background:linear-gradient(145deg,#292d69,#171936);border:1px solid #ffffff3a;border-radius:25px;padding:clamp(22px,5vw,38px);text-align:center;box-shadow:0 25px 80px #0008;animation:pop .35s cubic-bezier(.2,.8,.2,1)}.dialog .big{font-size:4rem;animation:bounce .7s ease}.dialog h2{font-size:clamp(1.4rem,4vw,2rem);margin:8px 0 14px}.question{font-size:clamp(1.1rem,2.7vw,1.35rem);line-height:1.5;margin:15px 0 20px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{min-height:58px;border:1px solid #ffffff35;border-radius:13px;background:#ffffff12;color:white;font-size:1rem;font-weight:750;padding:12px;cursor:pointer}.answer:hover:not(:disabled){background:#ffffff24;border-color:var(--cyan)}.answer.correct{background:#1b8058;border-color:var(--green)}.answer.wrong{background:#9c365c;border-color:var(--pink)}.feedback{min-height:32px;margin:15px 0 4px;font-weight:800}.feedback.good{color:var(--green)}.feedback.bad{color:#ff9bbd}.dialog .btn{margin-top:10px}.hidden{display:none!important}
+@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes pop{0%{transform:scale(.65) rotate(-4deg);opacity:0}70%{transform:scale(1.04) rotate(1deg)}100%{transform:scale(1);opacity:1}}@keyframes bounce{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-15px) rotate(-8deg)}70%{transform:translateY(2px) rotate(5deg)}}
+@media(max-width:720px){body{padding:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.box{min-height:130px}.stats{gap:8px}.stat{padding:11px}.stat strong{font-size:1.25rem}.answers{grid-template-columns:1fr}.pill{width:100%;text-align:center}}
+@media(min-width:500px) and (max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">🧪</div><div><h1>Kotak Misteri</h1><p class="subtitle">IPA Terpadu • Kelas VII SMP • Zat dan Perubahannya</p></div></div>
+    <div class="pill">🎯 Misi: Buka semua misteri!</div>
+  </header>
+  <section class="stats" aria-label="Statistik permainan">
+    <div class="stat"><small>⭐ SKOR</small><strong id="score">0</strong></div>
+    <div class="stat"><small>📦 KOTAK DIBUKA</small><strong id="opened">0 / 10</strong></div>
+    <div class="stat"><small>🏆 PENCAPAIAN</small><strong id="rank">Penjelajah</strong></div>
+  </section>
+  <div class="notice">👆 Pilih satu kotak untuk membukanya. Jawab pertanyaan dengan benar untuk mendapatkan poin. Hati-hati, ada kotak bonus dan kejutan!</div>
+  <main class="grid" id="grid" aria-label="Sepuluh kotak misteri"></main>
+  <div class="controls"><button class="btn secondary" id="soundBtn" aria-pressed="true">🔊 Suara: Aktif</button><button class="btn primary" id="againBtn">↻ Main Lagi</button></div>
+  <p class="footer">Belajar sains jadi petualangan! • Baca, pikirkan, lalu pilih jawaban terbaik.</p>
+</div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="dialog">
+  <div class="big" id="big">🎁</div><h2 id="modalTitle">Kotak terbuka!</h2>
+  <div id="bodyContent"></div>
+  <div class="feedback" id="feedback" aria-live="polite"></div>
+  <button class="btn primary hidden" id="continueBtn">Lanjutkan ➜</button>
+  <button class="btn secondary" id="closeBtn">Tutup</button>
+ </div>
+</div>
+<script>
+const data = [
+ {type:"q",q:"Manakah yang termasuk zat berwujud padat?",a:["Udara","Batu","Uap air","Oksigen"],correct:1,ex:"Batu memiliki bentuk dan volume tetap, sehingga termasuk zat padat.",pts:100},
+ {type:"q",q:"Perubahan wujud dari cair menjadi gas disebut ...",a:["Membeku","Mengembun","Menguap","Menyublim"],correct:2,ex:"Menguap terjadi ketika zat cair berubah menjadi gas, misalnya air yang dipanaskan.",pts:100},
+ {type:"bonus",title:"Bonus Bintang!",text:"Kamu menemukan kristal energi sains. Tambahan 150 poin!",pts:150},
+ {type:"q",q:"Es batu yang mencair menjadi air merupakan perubahan ...",a:["Kimia","Fisika","Pembakaran","Perkaratan"],correct:1,ex:"Zatnya tetap air (H₂O), hanya wujudnya berubah. Ini perubahan fisika.",pts:100},
+ {type:"q",q:"Contoh perubahan kimia adalah ...",a:["Kertas dipotong","Es mencair","Besi berkarat","Air membeku"],correct:2,ex:"Perkaratan menghasilkan zat baru, yaitu karat, sehingga termasuk perubahan kimia.",pts:120},
+ {type:"surprise",title:"Kesempatan Emas!",text:"Kejutan! Kamu mendapat bonus keberuntungan sebesar 50 poin.",pts:50},
+ {type:"q",q:"Alat yang tepat untuk mengukur massa benda adalah ...",a:["Termometer","Neraca","Gelas ukur","Stopwatch"],correct:1,ex:"Neraca digunakan untuk mengukur massa benda.",pts:100},
+ {type:"q",q:"Partikel zat gas dibandingkan zat padat umumnya ...",a:["Lebih rapat","Tidak bergerak","Lebih renggang dan bebas bergerak","Selalu tersusun teratur"],correct:2,ex:"Partikel gas berjauhan dan bergerak bebas sehingga gas memenuhi ruang.",pts:120},
+ {type:"q",q:"Air yang dimasukkan ke freezer berubah menjadi es. Perubahan ini disebut ...",a:["Menguap","Membeku","Mengembun","Menyublim"],correct:1,ex:"Membeku adalah perubahan wujud dari cair menjadi padat.",pts:100},
+ {type:"q",q:"Gelembung gas dan perubahan warna dapat menjadi tanda ...",a:["Perubahan kimia","Perubahan ukuran saja","Perubahan posisi","Perubahan bentuk saja"],correct:0,ex:"Terbentuknya gas atau perubahan warna dapat menjadi petunjuk adanya reaksi kimia, meskipun perlu diamati bersama tanda lainnya.",pts:130}
+];
+let score=0, opened=new Set(), soundOn=true, current=null, answered=false;
+const grid=document.getElementById('grid'), modal=document.getElementById('modal');
+function tone(freq=600,duration=.12){if(!soundOn)return;try{const C=window.AudioContext||window.webkitAudioContext;const c=new C(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=freq;o.type='sine';g.gain.setValueAtTime(.07,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+duration);o.start();o.stop(c.currentTime+duration);o.onended=()=>c.close()}catch(e){}}
+function renderGrid(){grid.innerHTML='';data.forEach((d,i)=>{const b=document.createElement('button');b.className='box'+(opened.has(i)?' opened':'')+(d.type==='bonus'?' bonus':'');b.disabled=opened.has(i);b.setAttribute('aria-label',`Kotak ${i+1}${opened.has(i)?', sudah dibuka':''}`);b.innerHTML=`<span class="num">KOTAK ${String(i+1).padStart(2,'0')}</span><span class="chest">${opened.has(i)?'📭':'🎁'}</span><span class="label">${opened.has(i)?'Misteri terungkap':'Buka misteri'}</span>`;b.addEventListener('click',()=>openBox(i));grid.appendChild(b)})}
+function updateStats(){document.getElementById('score').textContent=score;document.getElementById('opened').textContent=`${opened.size} / 10`;document.getElementById('rank').textContent=score>=850?'Ahli Sains':score>=500?'Peneliti Hebat':score>=250?'Ilmuwan Muda':'Penjelajah';if(opened.size===10)setTimeout(showEnd,450)}
+function openBox(i){if(opened.has(i))return;current=i;answered=false;opened.add(i);renderGrid();updateStats();tone(480,.1);setTimeout(()=>tone(760,.16),90);
+ const d=data[i];document.getElementById('big').textContent=d.type==='q'?'🧪':'✨';document.getElementById('modalTitle').textContent=d.type==='q'?`Kotak ${i+1}: Tantangan Sains`:d.title;
+ const body=document.getElementById('bodyContent');body.innerHTML='';
+ document.getElementById('feedback').textContent='';document.getElementById('feedback').className='feedback';document.getElementById('continueBtn').classList.add('hidden');
+ if(d.type==='q'){body.innerHTML=`<p class="question">${d.q}</p><div class="answers">${d.a.map((a,j)=>`<button class="answer" data-answer="${j}">${String.fromCharCode(65+j)}. ${a}</button>`).join('')}</div>`;body.querySelectorAll('.answer').forEach(btn=>btn.addEventListener('click',()=>checkAnswer(Number(btn.dataset.answer))))}
+ else {body.innerHTML=`<p class="question">${d.text}</p><p>🌟 <strong>+${d.pts} poin</strong></p>`;score+=d.pts;updateStats();document.getElementById('feedback').textContent='Hadiah berhasil diklaim!';document.getElementById('feedback').classList.add('good');document.getElementById('continueBtn').classList.remove('hidden');tone(880,.22)}
+ modal.classList.add('show');document.getElementById('closeBtn').focus();
+}
+function checkAnswer(n){if(answered)return;answered=true;const d=data[current],buttons=document.querySelectorAll('.answer');buttons.forEach((b,j)=>{b.disabled=true;if(j===d.correct)b.classList.add('correct');else if(j===n)b.classList.add('wrong')});const f=document.getElementById('feedback');if(n===d.correct){score+=d.pts;f.textContent=`Benar! +${d.pts} poin. ${d.ex}`;f.classList.add('good');tone(880,.2)}else{f.textContent=`Belum tepat. ${d.ex}`;f.classList.add('bad');tone(220,.25)}updateStats();document.getElementById('continueBtn').classList.remove('hidden');document.getElementById('continueBtn').focus()}
+function closeModal(){modal.classList.remove('show');if(opened.size===10)showEnd()}
+document.getElementById('closeBtn').addEventListener('click',closeModal);document.getElementById('continueBtn').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.getElementById('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;const b=document.getElementById('soundBtn');b.textContent=soundOn?'🔊 Suara: Aktif':'🔇 Suara: Mati';b.setAttribute('aria-pressed',String(soundOn));if(soundOn)tone(700,.1)});
+document.getElementById('againBtn').addEventListener('click',()=>{score=0;opened=new Set();current=null;modal.classList.remove('show');renderGrid();updateStats();tone(520,.12);window.scrollTo({top:0,behavior:'smooth'})});
+function showEnd(){if(!modal.classList.contains('show')&&opened.size===10){document.getElementById('big').textContent=score>=700?'🏆':'🎉';document.getElementById('modalTitle').textContent='Misi Selesai!';document.getElementById('bodyContent').innerHTML=`<p class="question">Kamu telah membuka semua kotak misteri!</p><p style="font-size:1.4rem">Skor akhir: <strong>${score}</strong></p><p>${score>=850?'Luar biasa! Kamu Ahli Sains!':score>=500?'Hebat! Terus asah rasa ingin tahumu!':'Bagus! Coba main lagi untuk meningkatkan skor.'}</p>`;document.getElementById('feedback').textContent='';document.getElementById('continueBtn').classList.add('hidden');modal.classList.add('show');tone(740,.2)}}
+renderGrid();updateStats();
+</script>
+</body>
+</html>
